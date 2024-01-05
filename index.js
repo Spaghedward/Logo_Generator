@@ -1,8 +1,9 @@
+// This script requires fs, inquirer, and the shape classes from shapes.js.  
 const fs = require('fs');
 const inquirer = require('inquirer');
 const {Circle, Square, Triangle} = require('./lib/shapes');
 
-
+// An array of questions that the .prompt will use. I set the hexadecimal to validate the answer to make sure it is a usable color code.
 const questions = [
         {
             type: 'prompt',
@@ -61,6 +62,7 @@ const questions = [
         }
     ]
 
+// This function takes the shape answer and creates the corresponding shape.   
 function logoGenerator(answers) {
 
         if (answers.shape === 'Triangle') {
@@ -75,12 +77,13 @@ function logoGenerator(answers) {
         }
     }
 
+// This function takes the logo created above and creates a file of it.
 function saveLogo(answers) {
         const customLogo = logoGenerator(answers);
         fs.writeFile("./logo.svg", customLogo, ()=> console.info("Generated logo.svg"));
     }
 
-
+// This function initializes the inquirer prompt and then passes the answers into the "saveLogo" function above.
 function init() {
         inquirer
         .prompt(questions)
